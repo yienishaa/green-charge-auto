@@ -8,6 +8,7 @@ public class GreenChargeAutoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GreenChargeAutoApplication.class, args);
+		
 	}
 
 }
