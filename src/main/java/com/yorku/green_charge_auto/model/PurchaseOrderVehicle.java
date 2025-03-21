@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "PurchaseOrderVehicle")
 public class PurchaseOrderVehicle {
 
-    @Id //To mention this is the primary key
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "poId")
     private Integer poId;
@@ -19,4 +19,12 @@ public class PurchaseOrderVehicle {
     @JoinColumn(name = "orderId")
     private PurchaseOrder purchaseOrder;
 
+    public Integer getPoId() { return poId; }
+    public void setPoId(Integer poId) { this.poId = poId; }
+
+    public Vehicle getVehicle() { return vehicle; }
+    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
+
+    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
 }
