@@ -1,7 +1,6 @@
 package com.yorku.green_charge_auto.service;
 
 import com.yorku.green_charge_auto.model.ShoppingCart;
-import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,9 @@ public class ShoppingCartService {
         shoppingCartRepository.deleteById(shoppingCartId);
     }
 
-    public void updateCart(Vehicle vehicle, ShoppingCart shoppingCart) {
-        shoppingCartRepository.updateCart(shoppingCart, vehicle);
+    public ShoppingCart updateCart(ShoppingCart shoppingCart) {
+        shoppingCartRepository.updateCart(shoppingCart);
+        return shoppingCart;
     }
 
     public ShoppingCart createCart(ShoppingCart shoppingCart) {

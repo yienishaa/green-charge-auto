@@ -1,7 +1,13 @@
 package com.yorku.green_charge_auto.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class LoginUser {
@@ -19,8 +25,8 @@ public class LoginUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public LoginUser() {
-    }
+    @OneToOne(mappedBy = "loginUser", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
 
     public LoginUser(String username, String password, Role role) {
         this.username = username;
@@ -28,35 +34,4 @@ public class LoginUser {
         this.role = role;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
