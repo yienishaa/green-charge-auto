@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GreenChargeAutoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GreenChargeAutoApplication.class, args);
-		
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GreenChargeAutoApplication.class, args);
+
+    }
 
 }

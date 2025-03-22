@@ -30,7 +30,8 @@ public class Vehicle {
     @Column(name = "quantity")
     private Integer quantity;
 
-    public Vehicle() {}
+    public Vehicle() {
+    }
 
     public Vehicle(String name, String description, String brand, String model, Double price, Integer quantity) {
         this.name = name;
@@ -42,24 +43,59 @@ public class Vehicle {
     }
 
     // Getters and Setters
-    public Integer getVid() { return vid; }
-    public void setVid(Integer vid) { this.vid = vid; }
+    public Integer getVid() {
+        return vid;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setVid(Integer vid) {
+        this.vid = vid;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getName() {
+        return name;
+    }
 
-    public String getBrand() { return brand; }
-    public void setBrand(String brand) { this.brand = brand; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public Integer getQuantity() { return quantity; }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

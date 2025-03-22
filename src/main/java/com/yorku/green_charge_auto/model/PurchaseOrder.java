@@ -1,6 +1,7 @@
 package com.yorku.green_charge_auto.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -45,28 +46,66 @@ public class PurchaseOrder {
     }
 
     // Getters and Setters
-    public Integer getOrderId() { return orderId; }
-    public void setOrderId(Integer orderId) { this.orderId = orderId; }
+    public Integer getOrderId() {
+        return orderId;
+    }
 
-    public String getFname() { return fname; }
-    public void setFname(String fname) { this.fname = fname; }
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
-    public String getLname() { return lname; }
-    public void setLname(String lname) { this.lname = lname; }
+    public String getFname() {
+        return fname;
+    }
 
-    public OrderStatus getStatus() { return status; }
-    public void setStatus(OrderStatus status) { this.status = status; }
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
 
-    public Double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
+    public String getLname() {
+        return lname;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
 
-    public Address getAddress() { return address; }
-    public void setAddress(Address address) { this.address = address; }
+    public OrderStatus getStatus() {
+        return status;
+    }
 
-    public List<PurchaseOrderVehicle> getPurchaseOrderVehicles() { return purchaseOrderVehicles; }
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<PurchaseOrderVehicle> getPurchaseOrderVehicles() {
+        return purchaseOrderVehicles;
+    }
+
     public void setPurchaseOrderVehicles(List<PurchaseOrderVehicle> purchaseOrderVehicles) {
         this.purchaseOrderVehicles = purchaseOrderVehicles;
     }

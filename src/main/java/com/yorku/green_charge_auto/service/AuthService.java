@@ -28,6 +28,10 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    public AuthService(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     public String registerUser(String username, String password, Role role) {
         LoginUser user = new LoginUser(username, password, role);
         loginUserRepository.save(user);

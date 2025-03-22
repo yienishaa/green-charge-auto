@@ -19,12 +19,27 @@ public class PurchaseOrderVehicle {
     @JoinColumn(name = "orderId")
     private PurchaseOrder purchaseOrder;
 
-    public Integer getPoId() { return poId; }
-    public void setPoId(Integer poId) { this.poId = poId; }
+    public Integer getPoId() {
+        return poId;
+    }
 
-    public Vehicle getVehicle() { return vehicle; }
-    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
+    public void setPoId(Integer poId) {
+        this.poId = poId;
+    }
 
-    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public PurchaseOrder getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
+    }
 }

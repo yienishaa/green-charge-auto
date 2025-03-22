@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
     Optional<Vehicle> findByName(String name);
+
     List<Vehicle> findByBrand(String brand);
 }
