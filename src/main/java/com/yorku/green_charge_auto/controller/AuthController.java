@@ -22,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<Map<String, String>> loginUser(@RequestParam String username, @RequestParam String password) throws Exception {
         String token = authService.loginUser(username, password);
         return ResponseEntity.ok(Map.of("token", token));
     }
