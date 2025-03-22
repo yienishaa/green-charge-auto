@@ -7,20 +7,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "PurchaseOrderVehicle")
-public class PurchaseOrderVehicle {
+@Table(name = "shoppingCart")
+public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "poId")
-    private Integer poId;
+    @Column(name = "cartId")
+    private Integer cartId;
 
     @ManyToOne
     @JoinColumn(name = "vid")
     private Vehicle vehicle;
 
-    @ManyToOne
-    @JoinColumn(name = "orderId")
-    private PurchaseOrder purchaseOrder;
+    @Column(name = "qty")
+    private Integer qty;
+
+    @Column(name = "totalPrice")
+    private Double totalPrice;
+
+
 
 }

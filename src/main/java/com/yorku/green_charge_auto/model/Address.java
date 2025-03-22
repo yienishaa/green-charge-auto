@@ -1,7 +1,11 @@
 package com.yorku.green_charge_auto.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "address")
 public class Address {
