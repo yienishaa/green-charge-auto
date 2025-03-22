@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
 
-    void updateCart(ShoppingCart shoppingCart, Vehicle vehicle);
+    void updateCart(ShoppingCart shoppingCart);
 }

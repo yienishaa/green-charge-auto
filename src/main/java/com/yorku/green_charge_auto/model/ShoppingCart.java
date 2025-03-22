@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Getter
 @Setter
 @Entity
@@ -15,16 +19,12 @@ public class ShoppingCart {
     @Column(name = "cartId")
     private Integer cartId;
 
-    @ManyToOne
-    @JoinColumn(name = "vid")
-    private Vehicle vehicle;
+    @OneToOne
+    @JoinColumn(name = "loginUser_id")
+    private LoginUser loginUser;
 
-    @Column(name = "qty")
-    private Integer qty;
-
-    @Column(name = "totalPrice")
-    private Double totalPrice;
-
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> items = new ArrayList<>();
 
 
 }
