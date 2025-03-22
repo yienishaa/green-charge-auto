@@ -7,6 +7,7 @@ import com.yorku.green_charge_auto.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,11 +26,10 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationConfiguration authConfig;
 
-    public AuthService(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+    public AuthService(AuthenticationConfiguration authConfig) {
+        this.authConfig = authConfig;
     }
 
     public String registerUser(String username, String password, Role role) {
@@ -38,7 +38,8 @@ public class AuthService implements UserDetailsService {
         return jwtUtil.generateToken(username);
     }
 
-    public String loginUser(String username, String password) {
+    public String loginUser(String username, String password) throws Exception {
+        AuthenticationManager authenticationManager = authConfig.getAuthenticationManager();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         return jwtUtil.generateToken(username);
     }
