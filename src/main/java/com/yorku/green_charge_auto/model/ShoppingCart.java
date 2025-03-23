@@ -20,11 +20,7 @@ public class ShoppingCart {
     private Integer cartId;
 
     @OneToOne
-    @JoinColumn(name = "loginUser_id")
+    @JoinColumn(name = "userId")
     private LoginUser loginUser;
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> items = new ArrayList<>();
-
 
 }

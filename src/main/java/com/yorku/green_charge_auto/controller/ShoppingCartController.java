@@ -30,15 +30,15 @@ public class ShoppingCartController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ShoppingCart createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCartService.createCart(shoppingCart);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<ShoppingCart> updateShoppingCart(@RequestBody ShoppingCart shoppingCart) {
+    @PutMapping("/{id}/add-to-cart")
+    public ResponseEntity<ShoppingCart> addToCart(@PathVariable int cartId,@RequestBody Vehicle vehicle) {
         try {
-            return ResponseEntity.ok(shoppingCartService.updateCart(shoppingCart));
+            return ResponseEntity.ok(shoppingCartService.addToCart(cartId, vehicle));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
