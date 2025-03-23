@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "6e0f5804-161e-44cb-bdae-95b00e443c22",
+		"name": "Deliverable_2_TestCases",
+		"description": "The Purpose of this document is to outline the test cases that were used/devolped for deliverable 2. The Test cases can be seen below:\n\n**Test ID**: Customer017  \n**Category**: Authentication\n\n**Requirements :** UC1 - Unauthorized Access  \n**Initial Condition:** The system is operational and the user has invalid credentials.\n\n**Procedure:**\n\n1. The user attempts to log in with invalid credentials.\n    \n2. The system responds with an unauthorized error\n    \n\nExpected Outcome: The system responds with a status code 401 (Unauthorized).\n\nComments: This test ensures that invalid credentials are properly handled.\n\n**Test ID**: Customer018  \n**Category**: Authentication\n\n**Requirements** : UC2 - Token Expiry  \nInitial Condition: The system is operational and the user is logged in with an expired token.\n\nProcedure:\n\n- The user attempts to access a protected resource with an expired token.\n    \n- The system responds with an unauthorized error.\n    \n\nExpected Outcome: The system responds with a status code 401 (Unauthorized).\n\nComments: This test verifies that expired tokens are detected and rejected.\n\n**Test ID**: Customer019  \n**Category**: Account Management\n\n**Requirements** : UC4 - Password Reset  \nInitial Condition: The system is operational and the user is requesting a password reset.\n\nProcedure:\n\n- The user navigates to the password reset feature.\n    \n- The user submits their email address for the reset.\n    \n\nExpected Outcome: The system responds with a status code 200 (Success).\n\nComments: This test ensures that a password reset request is processed successfully.\n\nTest ID: Customer020  \nCategory: Authentication\n\nRequirements Coverage: UC5 - Account Lockout  \nInitial Condition: The system is operational and the user has attempted multiple failed logins.\n\nProcedure:\n\n- The user attempts to log in with incorrect credentials multiple times.\n    \n- The system locks the account after the set threshold is reached.\n    \n\nExpected Outcome: The system responds with a status code 429 (Too Many Requests).\n\nComments: This test ensures that account lockout mechanisms work correctly after multiple failed attempts.\n\nTest ID: Customer021  \nCategory: Authorization\n\nRequirements Coverage: UC6 - Admin Access  \nInitial Condition: The system is operational, and the user has administrative privileges.\n\nProcedure:\n\n- The user navigates to an admin-only route.\n    \n- The user attempts to access the route.\n    \n\nExpected Outcome: The system responds with a status code 200 (OK).\n\nComments: This test ensures that admin users have access to protected routes.\n\nTest ID: Customer022  \nCategory: Authorization\n\nRequirements Coverage: UC7 - Restricted Admin Access  \nInitial Condition: The system is operational, and the user is a non-admin.\n\nProcedure:\n\n- The user navigates to a restricted admin route.\n    \n- The user attempts to access the route.\n    \n\nExpected Outcome: The system responds with a status code 403 (Forbidden).\n\nComments: This test ensures that non-admin users are denied access to restricted admin routes.\n\nTest ID: Customer023  \nCategory: Security\n\nRequirements Coverage: UC8 - SQL Injection Prevention  \nInitial Condition: The system is operational and the user is attempting to submit a potentially malicious request.\n\nProcedure:\n\n- The user attempts an SQL injection attack in the request body or parameters.\n    \n- The system processes the request.\n    \n\nExpected Outcome: The system responds with a status code 400 (Bad Request), blocking the SQL injection attempt.\n\nComments: This test ensures that SQL injection attempts are prevented.\n\nTest ID: Customer024  \nCategory: Security\n\nRequirements Coverage: UC9 - CSRF Protection  \nInitial Condition: The system is operational and the user is attempting to make a request without a CSRF token.\n\nProcedure:\n\n- The user attempts to make a request that requires CSRF protection without providing a token.\n    \n- The system processes the request.\n    \n\nExpected Outcome: The system responds with a status code 403 (Forbidden).\n\nComments: This test ensures that missing CSRF tokens are handled appropriately.\n\nTest ID: Customer025  \nCategory: Performance\n\nRequirements Coverage: UC10 - Load Handling  \nInitial Condition: The system is operational and is under load conditions.\n\nProcedure:\n\n- The system receives concurrent requests.\n    \n- The server attempts to handle these requests simultaneously.\n    \n\nExpected Outcome: The system responds with a status code 200 (OK), demonstrating it can handle high loads.\n\nComments: This test ensures that the server can manage concurrent requests without failure.\n\nTest ID: Customer026  \nCategory: Performance\n\nRequirements Coverage: UC11 - Rate Limiting  \nInitial Condition: The system is operational, and the user is making excessive requests.\n\nProcedure:\n\n- The user sends a large number of requests in a short period.\n    \n- The system limits the rate of requests.\n    \n\nExpected Outcome: The system responds with a status code 429 (Too Many Requests).\n\nComments: This test ensures that rate limiting works as expected when the user exceeds the allowed request threshold.\n\nTest ID: Customer027  \nCategory: Performance\n\nRequirements Coverage: UC12 - Response Time  \nInitial Condition: The system is operational and the user is making a request.\n\nProcedure:\n\n- The user sends a request to the system.\n    \n- The system processes the request.\n    \n\nExpected Outcome: The system responds within 500 milliseconds.\n\nComments: This test ensures that the system provides acceptable response times.\n\nTest ID: Customer028  \nCategory: Database\n\nRequirements Coverage: UC13 - Item Creation  \nInitial Condition: The system is operational and the user is creating a new item in the database.\n\nProcedure:\n\n- The user submits the required data to create a new item.\n    \n- The system processes the creation request.\n    \n\nExpected Outcome: The system responds with a status code 201 (Created).\n\nComments: This test ensures that new items are successfully added to the database.\n\nTest ID: Customer029  \nCategory: Database\n\nRequirements Coverage: UC14 - Duplicate Entry Handling  \nInitial Condition: The system is operational and the user is attempting to submit a duplicate entry.\n\nProcedure:\n\n- The user submits data that already exists in the database.\n    \n- The system checks for duplicates.\n    \n\nExpected Outcome: The system responds with a status code 409 (Conflict).\n\nComments: This test ensures that duplicate entries are not added to the database.\n\nTest ID: Customer030  \nCategory: Database\n\nRequirements Coverage: UC15 - Data Consistency  \nInitial Condition: The system is operational and the user is retrieving data from the database.\n\nProcedure:\n\n- The user makes a request to retrieve data.\n    \n- The system retrieves the requested data.\n    \n\nExpected Outcome: The system responds with a status code 200 (OK), and the data is accurate.\n\nComments: This test ensures that the data retrieved from the database is consistent and accurate.\n\nTest ID: Customer031  \nCategory: Database\n\nRequirements Coverage: UC16 - Data Deletion  \nInitial Condition: The system is operational and the user is attempting to delete data.\n\nProcedure:\n\n- The user deletes data from the system.\n    \n- The user attempts to retrieve the deleted data.\n    \n\nExpected Outcome: The system responds with a status code 404 (Not Found), indicating the data is no longer retrievable.\n\nComments: This test ensures that deleted data is no longer accessible.\n\nTest ID: Customer032  \nCategory: System Integrity\n\nRequirements Coverage: UC17 - Data Persistence After Restart  \nInitial Condition: The system is operational, and a service restart is initiated.\n\nProcedure:\n\n- The user creates or modifies data in the system.\n    \n- The system is restarted.\n    \n- The user checks if the data persists after the restart.\n    \n\nExpected Outcome: The system responds with a status code 200 (OK), and the data remains intact.\n\nComments: This test ensures that data persists after a system restart.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10354773"
+	},
+	"item": [
+		{
+			"name": "Get all vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add vehicle",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Corolla\",\n    \"description\": \"\",\n    \"brand\": \"Toyota\",\n    \"model\": \"FX\",\n    \"price\": 23000.00,\n    \"quantity\": 12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update vehicle",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\": 45000.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vehicles/23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove vehicle",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicles/23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add admin user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"yienisha\",\n    \"password\": \"abcd123\",\n    \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add customer user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"yienisha\",\n    \"password\": \"abcd123\",\n    \"role\": \"USER\",\n    \"shopping_cart\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"yienisha11\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/login?username=yienisha&password=abcd123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "yienisha"
+						},
+						{
+							"key": "password",
+							"value": "abcd123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shopping cart details by cart Id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/shopping-cart/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shopping-cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add shopping cart for user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login_user\": {\n        \"id\": 1,\n        \"username\": \"yienisha\",\n        \"role\": \"USER\"\n    },\n    \"cart_items\":[{\n        \"vehicle\":{\n            \"vid\": 1\n        },\n        \"quantity\": 1\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/shopping-cart/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shopping-cart",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update cart with new items",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\": 1,\n    \"cart_items\":[\n        {\n            \"vehicle\":{\n                \"vid\": 1\n            },\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/shopping-cart/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shopping-cart",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Test #17 - Unauthorized response for invalid credentials\r",
+					"pm.test(\"Unauthorized response for invalid credentials\", function () {\r",
+					"    pm.response.to.have.status(401);\r",
+					"});\r",
+					"\r",
+					"// Test #18 - Token Expiry Handling\r",
+					"pm.test(\"Unauthorized response when using expired token\", function () {\r",
+					"    pm.response.to.have.status(401);\r",
+					"});\r",
+					"\r",
+					"// Test #19 - Password Reset Request\r",
+					"pm.test(\"Password reset request returns success\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"// Test #20 - Account Lockout After Multiple Failed Logins\r",
+					"pm.test(\"Too many failed attempts should lock the account\", function () {\r",
+					"    pm.response.to.have.status(429);\r",
+					"});\r",
+					"\r",
+					"// Test #21 - Admin Access to Protected Route\r",
+					"pm.test(\"Admin access should be authorized\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"// Test #22 - User Access to Restricted Admin Route\r",
+					"pm.test(\"Non-admin user should be denied access\", function () {\r",
+					"    pm.response.to.have.status(403);\r",
+					"});\r",
+					"\r",
+					"// Test #23 - SQL Injection Prevention\r",
+					"pm.test(\"Attempted SQL injection should be blocked\", function () {\r",
+					"    pm.response.to.have.status(400);\r",
+					"});\r",
+					"\r",
+					"// Test #24 - CSRF Protection Validation\r",
+					"pm.test(\"Missing CSRF token should return forbidden\", function () {\r",
+					"    pm.response.to.have.status(403);\r",
+					"});\r",
+					"\r",
+					"// Test #25 - High Load Handling\r",
+					"pm.test(\"Server handles concurrent requests successfully\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"// Test #26 - Rate Limiting Enforcement\r",
+					"pm.test(\"Too many requests trigger rate limiting\", function () {\r",
+					"    pm.response.to.have.status(429);\r",
+					"});\r",
+					"\r",
+					"// Test #27 - Response Time Validation\r",
+					"pm.test(\"API response time is acceptable\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+					"});\r",
+					"\r",
+					"// Test #28 - Valid Item Creation in Database\r",
+					"pm.test(\"Item successfully added to database\", function () {\r",
+					"    pm.response.to.have.status(201);\r",
+					"});\r",
+					"\r",
+					"// Test #29 - Duplicate Entry Handling\r",
+					"pm.test(\"Duplicate data entry should be prevented\", function () {\r",
+					"    pm.response.to.have.status(409);\r",
+					"});\r",
+					"\r",
+					"// Test #30 - Data Consistency Check\r",
+					"pm.test(\"Data retrieved from DB is accurate\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"    pm.expect(pm.response.json().data).to.be.an(\"object\");\r",
+					"});\r",
+					"\r",
+					"// Test #31 - Data Deletion Verification\r",
+					"pm.test(\"Deleted data should not be retrievable\", function () {\r",
+					"    pm.response.to.have.status(404);\r",
+					"});\r",
+					"\r",
+					"// Test #32 - Service Restart and Data Persistence\r",
+					"pm.test(\"Data remains intact after service restart\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					""
+				]
+			}
+		}
+	]
+}
