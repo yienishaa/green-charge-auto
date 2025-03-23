@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.model;
 
+import com.yorku.green_charge_auto.constants.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

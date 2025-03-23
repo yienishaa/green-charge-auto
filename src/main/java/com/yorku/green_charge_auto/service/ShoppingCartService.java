@@ -31,8 +31,14 @@ public class ShoppingCartService {
         return shoppingCartRepository.save(shoppingCart);
     }
 
-    public void deleteCart(int shoppingCartId) {
-        shoppingCartRepository.deleteById(shoppingCartId);
+    public boolean deleteCart(int shoppingCartId) {
+        if (shoppingCartRepository.findById(shoppingCartId).isPresent()) {
+            shoppingCartRepository.deleteById(shoppingCartId);
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     public ShoppingCart addToCart(int cartId, Vehicle vehicle) {

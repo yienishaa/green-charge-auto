@@ -1,7 +1,7 @@
 package com.yorku.green_charge_auto.service;
 
 import com.yorku.green_charge_auto.model.LoginUser;
-import com.yorku.green_charge_auto.model.Role;
+import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.repository.LoginUserRepository;
 import com.yorku.green_charge_auto.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.yorku.green_charge_auto.controller;
 
-import com.yorku.green_charge_auto.model.Role;
+import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

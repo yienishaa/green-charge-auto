@@ -1,8 +1,7 @@
 package com.yorku.green_charge_auto.service;
 
 import com.yorku.green_charge_auto.model.PurchaseOrder;
-import com.yorku.green_charge_auto.model.PurchaseOrderVehicle;
-import com.yorku.green_charge_auto.model.OrderStatus;
+import com.yorku.green_charge_auto.constants.OrderStatus;
 import com.yorku.green_charge_auto.repository.PurchaseOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
