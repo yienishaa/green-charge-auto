@@ -1,10 +1,12 @@
 package com.yorku.green_charge_auto.controller;
 
+import com.yorku.green_charge_auto.model.CartItem;
 import com.yorku.green_charge_auto.model.ShoppingCart;
 import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.service.ShoppingCartService;
 import com.yorku.green_charge_auto.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +44,27 @@ public class ShoppingCartController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}/delete-all")
+    public HttpStatus deleteShoppingCart(@PathVariable int id) {
+        try {
+            if(shoppingCartService.deleteCart(id)){
+                return HttpStatus.OK;
+            }else {
+                return HttpStatus.NOT_FOUND;
+            }
+
+        }catch (RuntimeException e) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+    }
+
+    @PutMapping("/update-cart")
+    public HttpStatus updateCart(@RequestBody CartItem cartItem) {
+        int cartId = cartItem.getShoppingCart().getCartId();
+        shoppingCartService.removeFromCart(cartId, cartItem.getVehicle());
+        return HttpStatus.OK;
     }
 
 }
