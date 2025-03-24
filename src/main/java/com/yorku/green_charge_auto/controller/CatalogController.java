@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.controller;
 
+import com.yorku.green_charge_auto.dto.VehicleResponse;
 import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class CatalogController {
     private VehicleService vehicleService;
 
     @GetMapping
-    public List<Vehicle> getAllVehicles() {
+    public List<VehicleResponse> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
 
