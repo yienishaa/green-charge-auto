@@ -19,5 +19,7 @@ public class VehicleResponse {
 
     private String model;
 
+    private Integer manufacturedYear;
+
     private List<ReviewResponse> reviews;
 }
