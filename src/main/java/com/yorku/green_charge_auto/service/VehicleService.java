@@ -44,16 +44,18 @@ public class VehicleService {
     }
 
     public Vehicle updateVehicle(int id, Vehicle updatedVehicle) {
-        return vehicleRepository.findById(id).map(vehicle -> {
-            vehicle.setName(updatedVehicle.getName());
-            vehicle.setDescription(updatedVehicle.getDescription());
-            vehicle.setBrand(updatedVehicle.getBrand());
-            vehicle.setModel(updatedVehicle.getModel());
-            vehicle.setPrice(updatedVehicle.getPrice());
-            vehicle.setQuantity(updatedVehicle.getQuantity());
-            return vehicleRepository.save(vehicle);
-        }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
-    }
+    return vehicleRepository.findById(id).map(vehicle -> {
+        vehicle.setName(updatedVehicle.getName());
+        vehicle.setDescription(updatedVehicle.getDescription());
+        vehicle.setBrand(updatedVehicle.getBrand());
+        vehicle.setModel(updatedVehicle.getModel());
+        vehicle.setPrice(updatedVehicle.getPrice());
+        vehicle.setQuantity(updatedVehicle.getQuantity());
+        vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear()); 
+        return vehicleRepository.save(vehicle);
+    }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
+}
+
 
     public void deleteVehicle(int id) {
         vehicleRepository.deleteById(id);
