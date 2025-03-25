@@ -62,19 +62,26 @@ public class VehicleService {
     }
 
     public VehicleResponse toVehicleResponse(Vehicle vehicle) {
-        List<ReviewResponse> reviewResponseList = new ArrayList<>();
+    List<ReviewResponse> reviewResponseList = new ArrayList<>();
 
-        for (Reviews review : vehicle.getReviews()) {
-            reviewResponseList.add(new ReviewResponse(review.getReviewId(), review.getStars(), review.getContent(), review.getAuthor()));
-        }
-
-        VehicleResponse vehicleResponse = new VehicleResponse();
-        vehicleResponse.setVid(vehicle.getVid());
-        vehicleResponse.setName(vehicle.getName());
-        vehicleResponse.setBrand(vehicle.getBrand());
-        vehicleResponse.setModel(vehicle.getModel());
-        vehicleResponse.setReviews(reviewResponseList);
-
-        return vehicleResponse;
+    for (Reviews review : vehicle.getReviews()) {
+        reviewResponseList.add(new ReviewResponse(
+            review.getReviewId(),
+            review.getStars(),
+            review.getContent(),
+            review.getAuthor()
+        ));
     }
+
+    VehicleResponse vehicleResponse = new VehicleResponse();
+    vehicleResponse.setVid(vehicle.getVid());
+    vehicleResponse.setName(vehicle.getName());
+    vehicleResponse.setBrand(vehicle.getBrand());
+    vehicleResponse.setModel(vehicle.getModel());
+    vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
+    vehicleResponse.setReviews(reviewResponseList);
+
+    return vehicleResponse;
+}
+
 }
