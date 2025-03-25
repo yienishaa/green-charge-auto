@@ -40,8 +40,8 @@ public class Vehicle {
     @Column(name = "mileage")
     private double mileage;
 
-    @Column(name = "manufacturedYear")
-    private Date manufacturedYear;
+    @Column(name = "manufactured_year")
+    private Integer manufacturedYear;
 
     @Column(name = "hasBeenInAccident")
     private boolean hasBeenInAccident;
