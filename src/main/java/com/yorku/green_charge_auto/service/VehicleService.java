@@ -31,10 +31,6 @@ public class VehicleService {
         return vehicleRepository.findById(id);
     }
 
-    public Optional<Vehicle> getVehicleByName(String name) {
-        return vehicleRepository.findByName(name);
-    }
-
     public List<Vehicle> getVehiclesByBrand(String brand) {
         return vehicleRepository.findByBrand(brand);
     }
@@ -45,7 +41,6 @@ public class VehicleService {
 
     public Vehicle updateVehicle(int id, Vehicle updatedVehicle) {
         return vehicleRepository.findById(id).map(vehicle -> {
-            vehicle.setName(updatedVehicle.getName());
             vehicle.setDescription(updatedVehicle.getDescription());
             vehicle.setBrand(updatedVehicle.getBrand());
             vehicle.setModel(updatedVehicle.getModel());
@@ -68,9 +63,12 @@ public class VehicleService {
 
         VehicleResponse vehicleResponse = new VehicleResponse();
         vehicleResponse.setVid(vehicle.getVid());
-        vehicleResponse.setName(vehicle.getName());
         vehicleResponse.setBrand(vehicle.getBrand());
         vehicleResponse.setModel(vehicle.getModel());
+        vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
+        vehicleResponse.setPrice(vehicle.getPrice());
+        vehicleResponse.setMileage(vehicle.getMileage());
+        vehicleResponse.setColors(vehicle.getColors());
         vehicleResponse.setReviews(reviewResponseList);
 
         return vehicleResponse;
