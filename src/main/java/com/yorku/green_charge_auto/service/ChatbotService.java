@@ -1,14 +1,11 @@
 package com.yorku.green_charge_auto.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 import java.util.TimeZone;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.yorku.green_charge_auto.controller.PurchaseOrderController;
-import com.yorku.green_charge_auto.model.PurchaseOrder;
 
 @Service
 public class ChatbotService {
@@ -44,11 +41,19 @@ public class ChatbotService {
 		return response;
 	}
 
-	public String getOrder(int orderNo) {
+	public String getOrder(Optional<Integer> orderNo) {
+		if(orderNo.isPresent()) {
+			int order = orderNo.get();
 		String url = "http:localhost:8080/orders/" + orderNo;
-		String response = "";
+		Date requestDate = Calendar.getInstance().getTime();
+		String response = "As of " + requestDate+ " Order " + order + "'s status is: ";
 		// result = getForObject(url, );
+		response += "";
 		return response;
+		}
+		else {
+			return "You did not enter a valid order number";
+		}
 	}
 
 	public String recommendCar(int people, int cargo) {
@@ -77,8 +82,7 @@ public class ChatbotService {
 	}
 
 	public String whyElectric() {
-
-		String response = "Electric cars offer several key benefits:\r\n"
+		return "Electric cars offer several key benefits:\r\n"
 				+ "\r\n"
 				+ "1. Environmentally Friendly: They produce zero tailpipe emissions, reducing air pollution and contributing to a cleaner planet.\r\n"
 				+ "\r\n"
@@ -93,8 +97,6 @@ public class ChatbotService {
 				+ "6. Convenient Charging: You can charge at home, eliminating frequent trips to the gas station.\r\n"
 				+ "\r\n"
 				+ "7. Tech-Forward: EVs often come with advanced features like autonomous driving and over-the-air updates.";
-
-		return response;
 	}
 
 }

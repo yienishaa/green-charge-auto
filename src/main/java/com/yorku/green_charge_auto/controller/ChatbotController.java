@@ -24,16 +24,7 @@ public class ChatbotController {
 
 	@GetMapping("/order/{id}")
 	public String getOrderStatus(@PathVariable Optional<Integer> id) {
-		String response = "";
-		if (id.isPresent()) {
-			Integer orderId = id.get();
-			response = "Order ID: " + orderId;
-			chatbotService.getOrder(orderId);
-			
-		} else {
-			response = "You did not provide an order ID. Please provide a valid ID!";
-		}
-		return response;
+		return chatbotService.getOrder(id);
 	}
 	
 	@GetMapping("/recommend")
