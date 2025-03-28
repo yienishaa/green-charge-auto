@@ -51,24 +51,10 @@ public class ChatbotService {
 		return response;
 	}
 
-	public String carQna(int people, int distance, int traffic, int cargo) {
+	public String recommendCar(int people, int cargo) {
 	    String response = "You will want a ";
 	    String justify = "";
 
-	    // Decision for electric, hybrid, or gasoline based on traffic and distance
-	    if (traffic == 1 || distance <= 250) {
-	        response += "electric ";
-	        justify += "Electric cars are ideal for short trips and stop-and-go traffic, as they offer smooth acceleration and are efficient in city driving. ";
-	    } else {
-	        response += "gasoline ";
-	        justify += "Gasoline cars are better suited for longer distances and higher speeds, especially for longer trips or if you need a larger driving range. ";
-	    }
-	    
-	    // Adding hybrid options for versatility
-	    response += "or hybrid ";
-	    justify += "Hybrid vehicles offer a good balance between fuel efficiency and range, making them great for both short city commutes and longer trips. ";
-	    
-	    // Consideration for cargo space
 	    if (cargo == 0) {
 	        if (people <= 2) {
 	            response += "coupe.";

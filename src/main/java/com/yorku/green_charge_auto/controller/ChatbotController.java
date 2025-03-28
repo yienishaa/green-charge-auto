@@ -37,8 +37,8 @@ public class ChatbotController {
 	}
 	
 	@GetMapping("/recommend")
-	public String suggestCar(@RequestParam int people, @RequestParam int distance, @RequestParam int traffic, @RequestParam int cargo ) {
-		return chatbotService.carQna(people, distance, traffic, cargo);
+	public String suggestCar(@RequestParam int people, @RequestParam int cargo ) {
+		return chatbotService.recommendCar(people, cargo);
 	}
 
 	
