@@ -46,22 +46,29 @@ public class VehicleService {
             vehicle.setModel(updatedVehicle.getModel());
             vehicle.setPrice(updatedVehicle.getPrice());
             vehicle.setQuantity(updatedVehicle.getQuantity());
+            vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear());
             return vehicleRepository.save(vehicle);
         }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
     }
+
 
     public void deleteVehicle(int id) {
         vehicleRepository.deleteById(id);
     }
 
     public VehicleResponse toVehicleResponse(Vehicle vehicle) {
-        List<ReviewResponse> reviewResponseList = new ArrayList<>();
+    List<ReviewResponse> reviewResponseList = new ArrayList<>();
 
-        for (Reviews review : vehicle.getReviews()) {
-            reviewResponseList.add(new ReviewResponse(review.getReviewId(), review.getStars(), review.getContent(), review.getAuthor()));
-        }
+    for (Reviews review : vehicle.getReviews()) {
+        reviewResponseList.add(new ReviewResponse(
+            review.getReviewId(),
+            review.getStars(),
+            review.getContent(),
+            review.getAuthor()
+        ));
+    }
 
-        VehicleResponse vehicleResponse = new VehicleResponse();
+       VehicleResponse vehicleResponse = new VehicleResponse();
         vehicleResponse.setVid(vehicle.getVid());
         vehicleResponse.setBrand(vehicle.getBrand());
         vehicleResponse.setModel(vehicle.getModel());
@@ -71,6 +78,7 @@ public class VehicleService {
         vehicleResponse.setColors(vehicle.getColors());
         vehicleResponse.setReviews(reviewResponseList);
 
-        return vehicleResponse;
-    }
+    return vehicleResponse;
+}
+
 }

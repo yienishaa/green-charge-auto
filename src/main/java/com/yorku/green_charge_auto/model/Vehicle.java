@@ -30,14 +30,14 @@ public class Vehicle {
     @Column(name = "model")
     private String model;
 
-    @Column(name = "manufacturedYear")
-    private String manufacturedYear;
-
     @Column(name = "description")
     private String description;
 
     @Column(name = "mileage")
     private double mileage;
+
+    @Column(name = "manufactured_year")
+    private Integer manufacturedYear;
 
     @Column(name = "hasBeenInAccident")
     private boolean hasBeenInAccident;
