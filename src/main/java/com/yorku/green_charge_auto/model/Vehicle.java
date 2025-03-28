@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -25,17 +24,14 @@ public class Vehicle {
     @Column(name = "vid")
     private Integer vid;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "brand")
     private String brand;
 
     @Column(name = "model")
     private String model;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "mileage")
     private double mileage;
@@ -56,6 +52,9 @@ public class Vehicle {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "image")
+    private String image;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

@@ -27,12 +27,12 @@ public class VehicleService {
         return vehicleResponseList;
     }
 
-    public Optional<Vehicle> getVehicleById(int id) {
-        return vehicleRepository.findById(id);
+    public List<Vehicle> getAdminAllVehicles() {
+        return vehicleRepository.findAll();
     }
 
-    public Optional<Vehicle> getVehicleByName(String name) {
-        return vehicleRepository.findByName(name);
+    public Optional<Vehicle> getVehicleById(int id) {
+        return vehicleRepository.findById(id);
     }
 
     public List<Vehicle> getVehiclesByBrand(String brand) {
@@ -44,17 +44,16 @@ public class VehicleService {
     }
 
     public Vehicle updateVehicle(int id, Vehicle updatedVehicle) {
-    return vehicleRepository.findById(id).map(vehicle -> {
-        vehicle.setName(updatedVehicle.getName());
-        vehicle.setDescription(updatedVehicle.getDescription());
-        vehicle.setBrand(updatedVehicle.getBrand());
-        vehicle.setModel(updatedVehicle.getModel());
-        vehicle.setPrice(updatedVehicle.getPrice());
-        vehicle.setQuantity(updatedVehicle.getQuantity());
-        vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear()); 
-        return vehicleRepository.save(vehicle);
-    }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
-}
+        return vehicleRepository.findById(id).map(vehicle -> {
+            vehicle.setDescription(updatedVehicle.getDescription());
+            vehicle.setBrand(updatedVehicle.getBrand());
+            vehicle.setModel(updatedVehicle.getModel());
+            vehicle.setPrice(updatedVehicle.getPrice());
+            vehicle.setQuantity(updatedVehicle.getQuantity());
+            vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear());
+            return vehicleRepository.save(vehicle);
+        }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
+    }
 
 
     public void deleteVehicle(int id) {
@@ -73,13 +72,15 @@ public class VehicleService {
         ));
     }
 
-    VehicleResponse vehicleResponse = new VehicleResponse();
-    vehicleResponse.setVid(vehicle.getVid());
-    vehicleResponse.setName(vehicle.getName());
-    vehicleResponse.setBrand(vehicle.getBrand());
-    vehicleResponse.setModel(vehicle.getModel());
-    vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
-    vehicleResponse.setReviews(reviewResponseList);
+       VehicleResponse vehicleResponse = new VehicleResponse();
+        vehicleResponse.setVid(vehicle.getVid());
+        vehicleResponse.setBrand(vehicle.getBrand());
+        vehicleResponse.setModel(vehicle.getModel());
+        vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
+        vehicleResponse.setPrice(vehicle.getPrice());
+        vehicleResponse.setMileage(vehicle.getMileage());
+        vehicleResponse.setColors(vehicle.getColors());
+        vehicleResponse.setReviews(reviewResponseList);
 
     return vehicleResponse;
 }
