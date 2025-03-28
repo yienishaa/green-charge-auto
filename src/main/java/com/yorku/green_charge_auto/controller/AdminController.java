@@ -1,4 +1,4 @@
-package com.yorku.green_charge_auto.controller;
+/*package com.yorku.green_charge_auto.controller;
 
 import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.repository.VehicleRepository;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.UUID;
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -25,7 +25,11 @@ public class AdminController {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    private static final String UPLOAD_DIR = "/Users/yienishaabeyratne/Desktop/";
+    private static final String UPLOAD_DIR = "s3://greencharge-catalog/";
+    // "src/main/resources/images/";
+    //private static final String UPLOAD_DIR = "s3://greencharge-eecs4413/uploads/";
+
+
 
     @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Vehicle> uploadProduct(
@@ -34,7 +38,7 @@ public class AdminController {
             @RequestParam("image") MultipartFile imageFile) throws IOException {
         System.out.println("Admin page");
         // Save file to local disk
-        String filename = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+        String filename = imageFile.getOriginalFilename();
         Path filepath = Paths.get(UPLOAD_DIR, filename);
         Files.createDirectories(filepath.getParent()); // Ensure dir exists
         Files.copy(imageFile.getInputStream(), filepath, StandardCopyOption.REPLACE_EXISTING);
@@ -52,3 +56,4 @@ public class AdminController {
 
 
 }
+*/

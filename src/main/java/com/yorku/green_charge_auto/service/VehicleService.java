@@ -27,6 +27,10 @@ public class VehicleService {
         return vehicleResponseList;
     }
 
+    public List<Vehicle> getAdminAllVehicles() {
+        return vehicleRepository.findAll();
+    }
+
     public Optional<Vehicle> getVehicleById(int id) {
         return vehicleRepository.findById(id);
     }
