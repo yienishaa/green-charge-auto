@@ -52,6 +52,8 @@ public class VehicleService {
         vehicle.setPrice(updatedVehicle.getPrice());
         vehicle.setQuantity(updatedVehicle.getQuantity());
         vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear()); 
+        vehicle.setBody(updatedVehicle.getBody());
+        vehicle.setImage(updatedVehicle.getImage());
         return vehicleRepository.save(vehicle);
     }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
 }
@@ -80,6 +82,13 @@ public class VehicleService {
     vehicleResponse.setModel(vehicle.getModel());
     vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
     vehicleResponse.setReviews(reviewResponseList);
+    vehicleResponse.setBody(vehicle.getBody());
+    vehicleResponse.setPrice(vehicle.getPrice());
+    vehicleResponse.setMileage(vehicle.getMileage());
+    vehicleResponse.setDescription(vehicle.getDescription());
+    vehicleResponse.setImage(vehicle.getImage());
+    vehicleResponse.setQuantity(vehicle.getQuantity());
+  
 
     return vehicleResponse;
 }

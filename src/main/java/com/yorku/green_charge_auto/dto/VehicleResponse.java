@@ -14,5 +14,12 @@ public class VehicleResponse {
     private String brand;
     private String model;
     private Integer manufacturedYear;
+    private double mileage;
+    private String body;
+    private String description;
+    private boolean hasBeenInAccident;
+    private Integer quantity;
     private List<ReviewResponse> reviews;
+    private String image;
+    private double price;
 }
