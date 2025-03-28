@@ -40,6 +40,11 @@ public class ChatbotController {
 	public String suggestCar(@RequestParam int people, @RequestParam int cargo ) {
 		return chatbotService.recommendCar(people, cargo);
 	}
+	
+	@GetMapping("/electric")
+	public String whyElectric() {
+		return chatbotService.whyElectric();
+	}
 
 	
 }
