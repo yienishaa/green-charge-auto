@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    private static final String UPLOAD_DIR = "/Users/yienishaabeyratne/Desktop";
+    private static final String UPLOAD_DIR = "/Users/yienishaabeyratne/Desktop/";
 
     @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Vehicle> uploadProduct(
