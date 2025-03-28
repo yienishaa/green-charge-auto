@@ -22,4 +22,5 @@ public class VehicleResponse {
     private List<ReviewResponse> reviews;
     private String image;
     private double price;
+    private List<String> colors;
 }
