@@ -24,9 +24,14 @@ public class S3Controller {
 
         @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
         public ResponseEntity<Vehicle> uploadProduct(
-
                 @RequestParam("brand") String brand,
                 @RequestParam("model") String model,
+                @RequestParam("description") String description,
+                @RequestParam("mileage") String mileage,
+                @RequestParam("manufactured_year") String manufacturedYear,
+                @RequestParam("hasBeenInAccident") String hasBeenInAccident,
+                @RequestParam("price") String price,
+                @RequestParam("quantity") String quantity,
                 @RequestParam("image") MultipartFile imageFile) throws IOException {
 
             System.out.println("Admin page");
@@ -38,6 +43,12 @@ public class S3Controller {
             Vehicle product = new Vehicle();
             product.setBrand(brand);
             product.setModel(model);
+            product.setDescription(description);
+            product.setMileage(Double.parseDouble(mileage));
+            product.setManufacturedYear(Integer.parseInt(manufacturedYear));
+            product.setHasBeenInAccident(Boolean.parseBoolean(hasBeenInAccident));
+            product.setPrice(Double.parseDouble(price));
+            product.setQuantity(Integer.parseInt(quantity));
             product.setImage(imageUrl); // <-- store the full S3 URL
 
             Vehicle saved = vehicleRepository.save(product);
