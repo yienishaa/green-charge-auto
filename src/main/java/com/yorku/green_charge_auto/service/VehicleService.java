@@ -27,12 +27,12 @@ public class VehicleService {
         return vehicleResponseList;
     }
 
-    public Optional<Vehicle> getVehicleById(int id) {
-        return vehicleRepository.findById(id);
+    public List<Vehicle> getAdminAllVehicles() {
+        return vehicleRepository.findAll();
     }
 
-    public Optional<Vehicle> getVehicleByName(String name) {
-        return vehicleRepository.findByName(name);
+    public Optional<Vehicle> getVehicleById(int id) {
+        return vehicleRepository.findById(id);
     }
 
     public List<Vehicle> getVehiclesByBrand(String brand) {
@@ -51,9 +51,8 @@ public class VehicleService {
     	vehicle.setDescription(updatedVehicle.getDescription());
     	vehicle.setHasBeenInAccident(updatedVehicle.isHasBeenInAccident());
     	vehicle.setImage(updatedVehicle.getImage());
-    	vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear()); 
+    	vehicle.setManufacturedYear(updatedVehicle.getManufacturedYear());
     	vehicle.setModel(updatedVehicle.getModel());
-        vehicle.setName(updatedVehicle.getName());
         vehicle.setPrice(updatedVehicle.getPrice());
         vehicle.setQuantity(updatedVehicle.getQuantity());
         vehicle.setReviews(updatedVehicle.getReviews());
@@ -88,12 +87,11 @@ public class VehicleService {
     vehicleResponse.setManufacturedYear(vehicle.getManufacturedYear());
     vehicleResponse.setMileage(vehicle.getMileage());
     vehicleResponse.setModel(vehicle.getModel());
-    vehicleResponse.setName(vehicle.getName());
     vehicleResponse.setPrice(vehicle.getPrice());
     vehicleResponse.setQuantity(vehicle.getQuantity());
     vehicleResponse.setReviews(reviewResponseList);
     vehicleResponse.setVid(vehicle.getVid());
-  
+
 
     return vehicleResponse;
 }

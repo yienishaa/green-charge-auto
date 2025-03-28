@@ -22,6 +22,11 @@ public class CatalogController {
         return vehicleService.getAllVehicles();
     }
 
+    @GetMapping("/admin/all")
+    public List<Vehicle> getAdminAllVehicles() {
+        return vehicleService.getAdminAllVehicles();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable int id) {
         return vehicleService.getVehicleById(id)

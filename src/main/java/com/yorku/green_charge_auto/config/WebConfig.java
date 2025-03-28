@@ -1,6 +1,5 @@
 package com.yorku.green_charge_auto.config;
 
-import jakarta.persistence.Column;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
