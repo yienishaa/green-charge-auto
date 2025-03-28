@@ -56,6 +56,7 @@ public class VehicleService {
         vehicle.setPrice(updatedVehicle.getPrice());
         vehicle.setQuantity(updatedVehicle.getQuantity());
         vehicle.setReviews(updatedVehicle.getReviews());
+        vehicle.setHotDeal(updatedVehicle.isHotDeal());
         return vehicleRepository.save(vehicle);
     }).orElseThrow(() -> new RuntimeException("Vehicle not found with id " + id));
 }
@@ -90,6 +91,7 @@ public class VehicleService {
     vehicleResponse.setPrice(vehicle.getPrice());
     vehicleResponse.setQuantity(vehicle.getQuantity());
     vehicleResponse.setReviews(reviewResponseList);
+    vehicleResponse.setHotDeal(vehicle.isHotDeal());
     vehicleResponse.setVid(vehicle.getVid());
 
 

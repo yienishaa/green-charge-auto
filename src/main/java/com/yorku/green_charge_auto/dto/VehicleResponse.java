@@ -26,4 +26,5 @@ public class VehicleResponse {
     private List<String> colors;
     private List<ReviewResponse> reviews;
     private String image;
+    private boolean hotDeal;
 }

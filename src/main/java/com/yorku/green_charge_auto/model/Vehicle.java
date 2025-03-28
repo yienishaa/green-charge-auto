@@ -59,6 +59,9 @@ public class Vehicle {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "hot_deal")
+    private boolean hotDeal;
+
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Reviews> reviews = new ArrayList<>();
