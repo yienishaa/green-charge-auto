@@ -47,4 +47,14 @@ public class PurchaseOrderController {
         purchaseOrderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/checkout")
+    public ResponseEntity<PurchaseOrder> checkout(@RequestBody CheckoutRequest request) {
+        try {
+            PurchaseOrder order = purchaseOrderService.checkout(request);
+            return ResponseEntity.ok(order);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
