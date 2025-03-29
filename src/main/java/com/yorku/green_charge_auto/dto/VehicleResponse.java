@@ -17,12 +17,14 @@ public class VehicleResponse {
     private String model;
 
     private Integer manufacturedYear;
-
-    private double price;
-
     private double mileage;
-
+    private String body;
+    private String description;
+    private boolean hasBeenInAccident;
+    private Integer quantity;
+    private double price;
     private List<String> colors;
-
     private List<ReviewResponse> reviews;
+    private String image;
+    private boolean hotDeal;
 }

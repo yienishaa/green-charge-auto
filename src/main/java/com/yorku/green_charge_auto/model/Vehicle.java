@@ -42,6 +42,9 @@ public class Vehicle {
     @Column(name = "hasBeenInAccident")
     private boolean hasBeenInAccident;
 
+    @Column(name = "body")
+    private String body;
+
     @ElementCollection
     @CollectionTable(name = "vehicle_colors", joinColumns = @JoinColumn(name = "vehicleId"))
     @Column(name = "color")
@@ -55,6 +58,9 @@ public class Vehicle {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "hot_deal")
+    private boolean hotDeal;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
