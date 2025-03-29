@@ -78,7 +78,7 @@ public  ChatbotResponse getOrder() {
             int order = orderNo.get();
 
             Date requestDate = Calendar.getInstance().getTime();
-            response = "As of " + requestDate + " the status of order #" + order + " is: ";
+            response = "As of " + requestDate + ", the status of order #" + order + " is: ";
             Optional<PurchaseOrder> status = orderService.getOrderById(order);
             if (status.isPresent()) {
                 response += status.get().getStatus();
