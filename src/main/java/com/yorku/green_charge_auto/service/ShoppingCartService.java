@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.service;
 
+import com.yorku.green_charge_auto.dto.CartItemResponse;
 import com.yorku.green_charge_auto.model.CartItem;
 import com.yorku.green_charge_auto.model.ShoppingCart;
 import com.yorku.green_charge_auto.model.Vehicle;
@@ -8,7 +9,8 @@ import com.yorku.green_charge_auto.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ShoppingCartService {
@@ -19,8 +21,15 @@ public class ShoppingCartService {
     @Autowired
     private CartItemRepository cartItemRepository;
 
-    public Optional<ShoppingCart> getShoppingCart(int shoppingCartId) {
-        return shoppingCartRepository.findById(shoppingCartId);
+    public List<CartItemResponse> getCartItemsByCartId(int shoppingCartId) {
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart_CartId(shoppingCartId);
+
+        List<CartItemResponse> cartItemResponseList = new ArrayList<>();
+
+        for (CartItem cartItem : cartItemList) {
+            cartItemResponseList.add(toCartItemResponse(cartItem));
+        }
+        return cartItemResponseList;
     }
 
     private ShoppingCart getShoppingCartAfterAddItem(int shoppingCartId) {
@@ -63,7 +72,18 @@ public class ShoppingCartService {
         return getShoppingCartAfterAddItem(cartId);
     }
 
+    public CartItemResponse toCartItemResponse(CartItem cartItem) {
 
+        CartItemResponse cartItemResponse = new CartItemResponse();
+        String vehicleName = cartItem.getVehicle().getBrand()+" "+cartItem.getVehicle().getModel();
+        cartItemResponse.setId(cartItem.getCartItemId());
+        cartItemResponse.setVehicleName(vehicleName);
+        cartItemResponse.setPrice(cartItem.getVehicle().getPrice());
+        cartItemResponse.setImageUrl(cartItem.getVehicle().getImage());
+        cartItemResponse.setQuantity(cartItem.getQuantity());
+
+        return cartItemResponse;
+    }
 
 
 }
