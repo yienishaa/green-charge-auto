@@ -31,7 +31,7 @@ public class ChatbotService {
 
     public ChatbotResponse getHours() {
         Map<String, String> options = new HashMap<>();
-        options.put("🤔 I have another question", "chatbot");
+        options.put("🤔 I have another question.", "chatbot");
         String response = "We are ";
         Calendar now = Calendar
                 .getInstance(TimeZone.getTimeZone("America/Toronto"));
@@ -66,8 +66,10 @@ public class ChatbotService {
 public  ChatbotResponse getOrder() {
         Map<String, String> options = new HashMap<>();
         options.put("", "");
+    options.put("🤔 I have another question.", "chatbot");
         String response = "Sure I can help you track your order! What's your order number?";
         return new ChatbotResponse(response, options);
+
 }
 
     public ChatbotResponse getOrderStatus(Optional<Integer> orderNo) {
@@ -86,7 +88,7 @@ public  ChatbotResponse getOrder() {
                 response += "Not available.";
             }
             options.put("📦 I want to track a different order.", "chatbot/order");
-            options.put("🤔 I have another question", "chatbot");
+            options.put("🤔 I have another question.", "chatbot");
             return new ChatbotResponse(response, options);
 
 
@@ -94,7 +96,7 @@ public  ChatbotResponse getOrder() {
             response = "You did not enter a valid order number";
 
             options.put("📦 Try again.", "chatbot/order");
-            options.put("🤔 I have another question", "chatbot");
+            options.put("🤔 I have another question.", "chatbot");
 
         }
         return new ChatbotResponse(response, options);
@@ -167,7 +169,7 @@ public ChatbotResponse askQuestions(int id, int people) {
 
     public ChatbotResponse whyElectric() {
         Map<String, String> options = new HashMap<>();
-        options.put("🤔 I have another question", "chatbot");
+        options.put("🤔 I have another question.", "chatbot");
         options.put("🚗 Help me pick a car.", "chatbot/recommend");
         String response = """
                 Electric cars offer several key benefits:\r
