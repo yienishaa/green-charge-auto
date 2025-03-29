@@ -1,7 +1,8 @@
 package com.yorku.green_charge_auto.controller;
 
-import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.constants.OrderStatus;
+import com.yorku.green_charge_auto.dto.CheckoutRequest;
+import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.service.PurchaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

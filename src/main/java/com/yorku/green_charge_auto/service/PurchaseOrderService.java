@@ -1,11 +1,17 @@
 package com.yorku.green_charge_auto.service;
 
-import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.constants.OrderStatus;
+import com.yorku.green_charge_auto.dto.CheckoutRequest;
+import com.yorku.green_charge_auto.model.Address;
+import com.yorku.green_charge_auto.model.PurchaseOrder;
+import com.yorku.green_charge_auto.model.PurchaseOrderVehicle;
+import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.repository.PurchaseOrderRepository;
+import com.yorku.green_charge_auto.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +20,9 @@ public class PurchaseOrderService {
 
     @Autowired
     private PurchaseOrderRepository purchaseOrderRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     public List<PurchaseOrder> getAllOrders() {
         return purchaseOrderRepository.findAll();
@@ -52,7 +61,7 @@ public class PurchaseOrderService {
     Address addr = new Address();
     addr.setStreet(request.getAddress().getStreet());
     addr.setCity(request.getAddress().getCity());
-    addr.setPostalCode(request.getAddress().getPostalCode());
+    addr.setZip(request.getAddress().getPostalCode());
     order.setAddress(addr);
 
     List<PurchaseOrderVehicle> povList = new ArrayList<>();
