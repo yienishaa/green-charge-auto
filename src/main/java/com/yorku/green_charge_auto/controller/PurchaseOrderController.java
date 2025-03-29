@@ -1,7 +1,8 @@
 package com.yorku.green_charge_auto.controller;
 
-import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.constants.OrderStatus;
+import com.yorku.green_charge_auto.dto.CheckoutRequest;
+import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.service.PurchaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +47,15 @@ public class PurchaseOrderController {
     public ResponseEntity<Void> deleteOrder(@PathVariable int id) {
         purchaseOrderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/checkout")
+    public ResponseEntity<PurchaseOrder> checkout(@RequestBody CheckoutRequest request) {
+        try {
+            PurchaseOrder order = purchaseOrderService.checkout(request);
+            return ResponseEntity.ok(order);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

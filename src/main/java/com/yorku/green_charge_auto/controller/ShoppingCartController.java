@@ -1,49 +1,36 @@
 package com.yorku.green_charge_auto.controller;
 
-import com.yorku.green_charge_auto.model.CartItem;
-import com.yorku.green_charge_auto.model.ShoppingCart;
-import com.yorku.green_charge_auto.model.Vehicle;
+import com.yorku.green_charge_auto.dto.AddToCartRequest;
+import com.yorku.green_charge_auto.dto.CartItemResponse;
+import com.yorku.green_charge_auto.dto.UpdateCartRequest;
+import com.yorku.green_charge_auto.repository.CartItemRepository;
 import com.yorku.green_charge_auto.service.ShoppingCartService;
-import com.yorku.green_charge_auto.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/shopping-cart")
 public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
-
     @Autowired
-    private VehicleService vehicleService;
-
+    private CartItemRepository cartItemRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShoppingCart> getShoppingCartById(@PathVariable int id) {
-        Optional<ShoppingCart> cart = shoppingCartService.getShoppingCart(id);
-        if (cart.isPresent()) {
-            return ResponseEntity.ok(cart.get());
-        }
-        return ResponseEntity.notFound().build();
+    public List<CartItemResponse> getCartItemsByCartId(@PathVariable int id) {
+        return shoppingCartService.getCartItemsByCartId(id);
     }
 
-    @PostMapping("/create")
-    public ShoppingCart createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
-        return shoppingCartService.createCart(shoppingCart);
-    }
-
-    @PutMapping("/{id}/add-to-cart")
-    public ResponseEntity<ShoppingCart> addToCart(@PathVariable int cartId,@RequestBody Vehicle vehicle) {
-        try {
-            return ResponseEntity.ok(shoppingCartService.addToCart(cartId, vehicle));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/add-to-cart")
+    public ResponseEntity<String> addToCart(@RequestBody AddToCartRequest request) {
+        shoppingCartService.addToCart(request.getVid(), request.getQuantity(), request.getUserId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}/delete-all")
@@ -60,11 +47,14 @@ public class ShoppingCartController {
         }
     }
 
+    @DeleteMapping("/{id}/delete-item")
+    public ResponseEntity<String> deleteItem(@PathVariable int id) {
+        return shoppingCartService.removeFromCart(id);
+    }
+
     @PutMapping("/update-cart")
-    public HttpStatus updateCart(@RequestBody CartItem cartItem) {
-        int cartId = cartItem.getShoppingCart().getCartId();
-        shoppingCartService.removeFromCart(cartId, cartItem.getVehicle());
-        return HttpStatus.OK;
+    public ResponseEntity<String> updateCart(@RequestBody UpdateCartRequest request) {
+        return shoppingCartService.updateCartItem(request);
     }
 
 }
