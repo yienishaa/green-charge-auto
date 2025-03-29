@@ -122,7 +122,7 @@ public ChatbotResponse askQuestions(int id, int people) {
             case 2:
                 response += "How much cargo do you typically carry?";
                 options.put("👛 Little to None (Groceries)", "chatbot/recommend?people="+people+"&cargo=0");
-                options.put("🛋️ A lot (Sofa)", "chatbot/recommend?people="+people+"&cargo=1");
+                options.put("🛋️ A lot (Luggage/Furniture)", "chatbot/recommend?people="+people+"&cargo=1");
         }
         return new ChatbotResponse(response, options);
 
@@ -137,16 +137,20 @@ public ChatbotResponse askQuestions(int id, int people) {
         options.put("🚗 Take me to the cars!", "//");
         if (cargo == 0) {
             if (people <= 2) {
-                response += "coupe.";
+                response += "coupe, or hatchback.";
                 justify += "A coupe is a compact, stylish choice ideal for smaller groups, offering limited cargo space but better maneuverability. ";
-            } else {
+            } else if (people <= 5){
                 response += "compact sedan or hatchback.";
                 justify += " Compact sedans and hatchbacks are practical for small to medium-sized groups, offering good fuel economy and enough space for daily needs. ";
             }
+            else {
+                response += "large SUV, or a minivan.";
+                justify += "  A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
+            }
         } else if (cargo == 1) {
             if (people <= 5) {
-                response += "compact or midsize SUV, or a truck, depending on how much you carry.";
-                justify += " Compact or midsize SUVs provide more space for passengers and cargo, while trucks can be useful if you need to transport larger loads. ";
+                response += "midsize or large SUV, or a truck, depending on how much you carry.";
+                justify += " Midsize and large SUVs provide more space for passengers and cargo, while trucks can be useful if you need to transport larger loads. ";
             } else {
                 response += "large SUV, or a minivan.";
                 justify += " A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
