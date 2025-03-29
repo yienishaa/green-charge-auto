@@ -32,8 +32,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" ,
-                                "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**",
+                                "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**", "/chatbot/questionnaire/**",
                         "/shopping-cart/add-to-cart/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
