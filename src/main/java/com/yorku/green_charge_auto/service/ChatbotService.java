@@ -1,14 +1,11 @@
 package com.yorku.green_charge_auto.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 import java.util.TimeZone;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.yorku.green_charge_auto.controller.PurchaseOrderController;
-import com.yorku.green_charge_auto.model.PurchaseOrder;
 
 @Service
 public class ChatbotService {
@@ -44,50 +41,62 @@ public class ChatbotService {
 		return response;
 	}
 
-	public String getOrder(int orderNo) {
+	public String getOrder(Optional<Integer> orderNo) {
+		if(orderNo.isPresent()) {
+			int order = orderNo.get();
 		String url = "http:localhost:8080/orders/" + orderNo;
-		String response = "";
+		Date requestDate = Calendar.getInstance().getTime();
+		String response = "As of " + requestDate+ " Order " + order + "'s status is: ";
 		// result = getForObject(url, );
+		response += "";
 		return response;
+		}
+		else {
+			return "You did not enter a valid order number";
+		}
 	}
 
-	public String carQna(int people, int distance, int traffic, int cargo) {
-	    String response = "You will want a ";
-	    String justify = "";
+	public String recommendCar(int people, int cargo) {
+		String response = "You will want a ";
+		String justify = "";
 
-	    // Decision for electric, hybrid, or gasoline based on traffic and distance
-	    if (traffic == 1 || distance <= 250) {
-	        response += "electric ";
-	        justify += "Electric cars are ideal for short trips and stop-and-go traffic, as they offer smooth acceleration and are efficient in city driving. ";
-	    } else {
-	        response += "gasoline ";
-	        justify += "Gasoline cars are better suited for longer distances and higher speeds, especially for longer trips or if you need a larger driving range. ";
-	    }
-	    
-	    // Adding hybrid options for versatility
-	    response += "or hybrid ";
-	    justify += "Hybrid vehicles offer a good balance between fuel efficiency and range, making them great for both short city commutes and longer trips. ";
-	    
-	    // Consideration for cargo space
-	    if (cargo == 0) {
-	        if (people <= 2) {
-	            response += "coupe.";
-	            justify += "A coupe is a compact, stylish choice ideal for smaller groups, offering limited cargo space but better maneuverability. ";
-	        } else {
-	            response += "compact sedan or hatchback.";
-	            justify += " Compact sedans and hatchbacks are practical for small to medium-sized groups, offering good fuel economy and enough space for daily needs. ";
-	        }
-	    } else if (cargo == 1) {
-	        if (people <= 5) {
-	            response += "compact or midsize SUV, or a truck, depending on how much you carry.";
-	            justify += " Compact or midsize SUVs provide more space for passengers and cargo, while trucks can be useful if you need to transport larger loads. ";
-	        }
-	    } else {
-	        response += "large SUV, or a minivan.";
-	        justify += " A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
-	    }
+		if (cargo == 0) {
+			if (people <= 2) {
+				response += "coupe.";
+				justify += "A coupe is a compact, stylish choice ideal for smaller groups, offering limited cargo space but better maneuverability. ";
+			} else {
+				response += "compact sedan or hatchback.";
+				justify += " Compact sedans and hatchbacks are practical for small to medium-sized groups, offering good fuel economy and enough space for daily needs. ";
+			}
+		} else if (cargo == 1) {
+			if (people <= 5) {
+				response += "compact or midsize SUV, or a truck, depending on how much you carry.";
+				justify += " Compact or midsize SUVs provide more space for passengers and cargo, while trucks can be useful if you need to transport larger loads. ";
+			}
+		} else {
+			response += "large SUV, or a minivan.";
+			justify += " A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
+		}
 
-	    return response + justify;
+		return response + justify;
+	}
+
+	public String whyElectric() {
+		return "Electric cars offer several key benefits:\r\n"
+				+ "\r\n"
+				+ "1. Environmentally Friendly: They produce zero tailpipe emissions, reducing air pollution and contributing to a cleaner planet.\r\n"
+				+ "\r\n"
+				+ "2. Lower Costs: EVs are cheaper to fuel and maintain, with fewer moving parts and no oil changes.\r\n"
+				+ "\r\n"
+				+ "3. Quiet & Smooth Ride: EVs operate quietly and provide smooth, instant acceleration.\r\n"
+				+ "\r\n"
+				+ "4. Incentives: Tax credits and rebates often make them more affordable upfront.\r\n"
+				+ "\r\n"
+				+ "5. Energy Efficiency: EVs use energy more efficiently than gas cars, reducing waste.\r\n"
+				+ "\r\n"
+				+ "6. Convenient Charging: You can charge at home, eliminating frequent trips to the gas station.\r\n"
+				+ "\r\n"
+				+ "7. Tech-Forward: EVs often come with advanced features like autonomous driving and over-the-air updates.";
 	}
 
 }
