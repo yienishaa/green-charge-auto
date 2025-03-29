@@ -6,11 +6,10 @@ import com.yorku.green_charge_auto.model.ChatbotResponse;
 import com.yorku.green_charge_auto.model.PurchaseOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Service
 public class ChatbotService {
-    private List<String> options;
     private final PurchaseOrderService orderService;
 
     @Autowired
@@ -72,7 +71,7 @@ public  ChatbotResponse getOrder() {
 }
 
     public ChatbotResponse getOrderStatus(Optional<Integer> orderNo) {
-        String response = "";
+        String response;
         Map<String, String> options = new HashMap<>();
         if (orderNo.isPresent()) {
 
