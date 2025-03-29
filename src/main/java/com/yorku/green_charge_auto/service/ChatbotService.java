@@ -147,11 +147,16 @@ public ChatbotResponse askQuestions(int id, int people) {
             if (people <= 5) {
                 response += "compact or midsize SUV, or a truck, depending on how much you carry.";
                 justify += " Compact or midsize SUVs provide more space for passengers and cargo, while trucks can be useful if you need to transport larger loads. ";
+            } else {
+                response += "large SUV, or a minivan.";
+                justify += " A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
             }
-        } else {
-            response += "large SUV, or a minivan.";
-            justify += " A large SUV or minivan is ideal for families or groups who need a lot of space for passengers and cargo, providing ample comfort and versatility. ";
         }
+            else {
+                response += "... wait how did you even get here?";
+                justify += " Leaving this in because it's funny but congrats! You somehow bypassed the parameters and got here, so have a cookie! 🍪";
+            }
+
 
         return new ChatbotResponse(response + " " + justify, options);
     }
