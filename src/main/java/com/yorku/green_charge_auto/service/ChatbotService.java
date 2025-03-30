@@ -1,5 +1,17 @@
 package com.yorku.green_charge_auto.service;
 
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Optional;
+import java.util.TimeZone;
+
+
+
 import java.util.*;
 
 import com.yorku.green_charge_auto.model.ChatbotResponse;
@@ -7,7 +19,8 @@ import com.yorku.green_charge_auto.model.PurchaseOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Getter
+@Setter
 @Service
 public class ChatbotService {
     private final PurchaseOrderService orderService;

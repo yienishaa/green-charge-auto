@@ -5,6 +5,8 @@ import com.yorku.green_charge_auto.dto.VehicleResponse;
 import com.yorku.green_charge_auto.model.Reviews;
 import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.repository.VehicleRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Getter
+@Setter
 @Service
 public class VehicleService {
 

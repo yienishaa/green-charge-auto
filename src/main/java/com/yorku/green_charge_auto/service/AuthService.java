@@ -4,6 +4,8 @@ import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.repository.LoginUserRepository;
 import com.yorku.green_charge_auto.security.JwtUtil;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Getter
+@Setter
 @Service
 public class AuthService implements UserDetailsService {
 

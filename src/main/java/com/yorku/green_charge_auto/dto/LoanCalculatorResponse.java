@@ -1,9 +1,9 @@
 package com.yorku.green_charge_auto.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoanCalculatorResponse {
