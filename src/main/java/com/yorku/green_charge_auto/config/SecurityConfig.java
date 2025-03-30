@@ -31,9 +31,11 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" , "/reviews/save-review/**",
-                                "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**",
-                        "/shopping-cart/add-to-cart/**").permitAll()
+
+                        .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" ,
+                                "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**", "/chatbot/questionnaire/**",
+                                         "/reviews/save-review/**", "/shopping-cart/add-to-cart/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
