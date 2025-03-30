@@ -1,8 +1,7 @@
 package com.yorku.green_charge_auto.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 //This class is used so that we don't expose our database structure outside

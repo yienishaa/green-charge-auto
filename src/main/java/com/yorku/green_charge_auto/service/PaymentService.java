@@ -2,12 +2,16 @@ package com.yorku.green_charge_auto.service;
 
 import com.yorku.green_charge_auto.model.Payment;
 import com.yorku.green_charge_auto.repository.PaymentRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
+@Setter
 @Service
 public class PaymentService {
 

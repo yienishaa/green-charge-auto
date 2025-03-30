@@ -11,7 +11,7 @@
     <groupId>com.yorku</groupId>
     <artifactId>green-charge-auto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>green-charge-auto</name>
     <description>EECS 4413 project</description>
     <url/>

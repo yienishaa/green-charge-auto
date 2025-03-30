@@ -31,7 +31,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" ,
+                        .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" , "/reviews/save-review/**",
                                 "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**",
                         "/shopping-cart/add-to-cart/**").permitAll()
                         .anyRequest().authenticated()
