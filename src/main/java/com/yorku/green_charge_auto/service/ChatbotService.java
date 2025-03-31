@@ -17,7 +17,6 @@ import java.util.*;
 import com.yorku.green_charge_auto.model.ChatbotResponse;
 import com.yorku.green_charge_auto.model.PurchaseOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Getter
 @Setter
@@ -183,7 +182,7 @@ public ChatbotResponse askQuestions(int id, int people) {
     public ChatbotResponse whyElectric() {
         Map<String, String> options = new HashMap<>();
         options.put("🤔 I have another question.", "chatbot");
-        options.put("🚗 Help me pick a car.", "chatbot/recommend");
+        options.put("🚗 Help me pick a car.", "chatbot/questionnaire/1");
         String response = """
                 Electric cars offer several key benefits:\r
                 \r
