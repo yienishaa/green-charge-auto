@@ -60,7 +60,7 @@ public class Vehicle {
     private String image;
 
     @Column(name = "hot_deal")
-    private boolean hotDeal;
+    private boolean hotDeal = false;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
