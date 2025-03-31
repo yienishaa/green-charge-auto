@@ -182,7 +182,7 @@ public ChatbotResponse askQuestions(int id, int people) {
     public ChatbotResponse whyElectric() {
         Map<String, String> options = new HashMap<>();
         options.put("🤔 I have another question.", "chatbot");
-        options.put("🚗 Help me pick a car.", "chatbot/questionnaire/1");
+        options.put("🚗 Help me pick a car.", "chatbot/questionnaire/1?people=1");
         String response = """
                 Electric cars offer several key benefits:\r
                 \r
