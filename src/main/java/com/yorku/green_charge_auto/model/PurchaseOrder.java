@@ -58,4 +58,16 @@ public class PurchaseOrder {
         this.updatedAt = LocalDateTime.now();
     }
 
+    // JPA callback methods
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }
