@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/orders")
 public class PurchaseOrderController {
@@ -51,6 +52,7 @@ public class PurchaseOrderController {
 
     @PostMapping("/checkout")
     public ResponseEntity<PurchaseOrder> checkout(@RequestBody CheckoutRequest request) {
+        System.out.println(request);
         try {
             PurchaseOrder order = purchaseOrderService.checkout(request);
             return ResponseEntity.ok(order);
