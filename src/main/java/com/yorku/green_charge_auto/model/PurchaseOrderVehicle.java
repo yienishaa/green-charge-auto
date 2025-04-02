@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class PurchaseOrderVehicle {
     private Vehicle vehicle;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "orderId")
     private PurchaseOrder purchaseOrder;
 

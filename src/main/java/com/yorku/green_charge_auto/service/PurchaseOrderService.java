@@ -29,6 +29,7 @@ public class PurchaseOrderService {
     private VehicleRepository vehicleRepository;
 
     public List<PurchaseOrder> getAllOrders() {
+        System.out.println("ORDERS list = "+purchaseOrderRepository.findAll());
         return purchaseOrderRepository.findAll();
     }
 
