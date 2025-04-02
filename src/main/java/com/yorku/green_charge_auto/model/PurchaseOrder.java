@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.yorku.green_charge_auto.constants.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -50,6 +51,7 @@ public class PurchaseOrder {
 
     @Getter
     @Setter
+    @JsonManagedReference
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
     private List<PurchaseOrderVehicle> purchaseOrderVehicles;
 
