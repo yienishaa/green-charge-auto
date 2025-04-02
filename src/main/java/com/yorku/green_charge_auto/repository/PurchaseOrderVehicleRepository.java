@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PurchaseOrderVehicleRepository extends JpaRepository<PurchaseOrderVehicle, Integer> {
+
+//    @Query("SELECT DISTINCT (v.vehicle) FROM PurchaseOrderVehicle v")
+//    List<Vehicle> findAllVehicleIds();
 }

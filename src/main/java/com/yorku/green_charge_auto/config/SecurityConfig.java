@@ -34,7 +34,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/vehicles/**", "/orders/**", "/shopping-cart/**","/loan-calculator/**", "/reviews/**" ,
                                 "/admin/products/**", "http://localhost:8080/uploads/**", "/chatbot/**", "/chatbot/order/**", "/chatbot/questionnaire/**",
-                                         "/reviews/save-review/**", "/shopping-cart/add-to-cart/**").permitAll()
+                                         "/reviews/save-review/**", "/shopping-cart/add-to-cart/**", "/dashboard/**").permitAll()
 
                         .anyRequest().authenticated()
                 )
