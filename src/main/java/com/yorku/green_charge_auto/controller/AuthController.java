@@ -3,6 +3,7 @@ package com.yorku.green_charge_auto.controller;
 import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.service.AuthService;
 import lombok.Data;
+import com.yorku.green_charge_auto.dto.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest request) throws Exception {
-        String token = authService.loginUser(request.getUsername(), request.getPassword());
+    public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest loginRequest) throws Exception {
+        String token = authService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
         return ResponseEntity.ok(Map.of("token", token));
     }
 
