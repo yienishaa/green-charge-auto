@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import com.yorku.green_charge_auto.dto.LoginRequest;
 
 import java.util.Optional;
 
@@ -52,6 +53,15 @@ public class AuthService implements UserDetailsService {
         String token = jwtUtil.generateToken(user.getUsername());
 
         return new LoginResponse(token, user.getId(), user.getRole());
+    public String loginUser(LoginRequest loginRequest) {
+        LoginUser user = loginUserRepository.findByUsername(loginRequest.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return jwtUtil.generateToken(user.getUsername());
     }
 
 
