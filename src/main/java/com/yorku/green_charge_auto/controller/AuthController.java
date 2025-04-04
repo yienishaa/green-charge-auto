@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.controller;
 
+
 import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.service.AuthService;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest loginRequest) throws Exception {
-        String token = authService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
+        String token = authService.loginUser(loginRequest);
         return ResponseEntity.ok(Map.of("token", token));
     }
 
@@ -34,11 +35,5 @@ public class AuthController {
         private String username;
         private String password;
         private Role role;
-    }
-
-    @Data
-    static class LoginRequest {
-        private String username;
-        private String password;
     }
 }

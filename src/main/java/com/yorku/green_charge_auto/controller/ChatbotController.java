@@ -10,7 +10,6 @@ import com.yorku.green_charge_auto.service.ChatbotService;
 
 @RestController
 @RequestMapping("/chatbot")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ChatbotController {
 
 	@Autowired

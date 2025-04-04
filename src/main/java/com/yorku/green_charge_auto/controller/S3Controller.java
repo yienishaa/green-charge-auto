@@ -13,7 +13,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000")
 public class S3Controller {
 
         @Autowired
