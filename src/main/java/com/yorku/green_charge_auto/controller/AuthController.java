@@ -2,6 +2,8 @@ package com.yorku.green_charge_auto.controller;
 
 import com.yorku.green_charge_auto.constants.Role;
 import com.yorku.green_charge_auto.service.AuthService;
+import lombok.Data;
+import com.yorku.green_charge_auto.dto.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +18,27 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> registerUser(@RequestParam String username, @RequestParam String password, @RequestParam Role role) {
-        String token = authService.registerUser(username, password, role);
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody RegisterRequest request) {
+        String token = authService.registerUser(request.getUsername(), request.getPassword(), request.getRole());
         return ResponseEntity.ok(Map.of("token", token));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody String username, @RequestBody String password) throws Exception {
-        String token = authService.loginUser(username, password);
+    public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest loginRequest) throws Exception {
+        String token = authService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
         return ResponseEntity.ok(Map.of("token", token));
+    }
+
+    @Data
+    static class RegisterRequest {
+        private String username;
+        private String password;
+        private Role role;
+    }
+
+    @Data
+    static class LoginRequest {
+        private String username;
+        private String password;
     }
 }
