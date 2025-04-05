@@ -58,32 +58,31 @@ public class ShoppingCartService {
 
     }
 
-    public ShoppingCart addToCart(int vid, int quantity, int userId) {
-        Optional<ShoppingCart> optionalCart = shoppingCartRepository.findByLoginUser_Id(userId);
+    public void addToCart(int vid, int quantity, int userId) {
 
-        ShoppingCart cart = optionalCart.orElseGet(()->{
-            ShoppingCart shoppingCart = new ShoppingCart();
-            LoginUser loginUser = loginUserRepository.findById(userId)
-                    .orElseThrow(()-> new RuntimeException("User not found"));
-            shoppingCart.setLoginUser(loginUser);
-            return shoppingCartRepository.save(shoppingCart);
-        });
+        LoginUser user = loginUserRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        //Get the vehicle
-        Vehicle vehicle = vehicleRepository.findById(vid).orElseThrow(()-> new RuntimeException("Vehicle not found"));
+        ShoppingCart cart = shoppingCartRepository.findByLoginUser_Id(userId)
+                .orElseGet(()-> {
+                    ShoppingCart newCart = new ShoppingCart();
+                    newCart.setLoginUser(user);
+                    return shoppingCartRepository.save(newCart);
+                });
 
-        //Checking if item is already in cart
+        Vehicle vehicle = vehicleRepository.findById(vid)
+                .orElseThrow(()-> new RuntimeException("Vehicle not found"));
+
         Optional<CartItem> existCartItem = cartItemRepository.findByShoppingCartAndVehicle(cart, vehicle);
 
+        CartItem cartItem;
         if (existCartItem.isPresent()) {
-            CartItem cartItem = existCartItem.get();
+            cartItem = existCartItem.get();
             cartItem.setQuantity(cartItem.getQuantity() + quantity);
-            cartItemRepository.save(cartItem);
         }else {
-            CartItem cartItem = new CartItem(cart, vehicle, quantity);
-            cartItemRepository.save(cartItem);
+            cartItem = new CartItem(cart, vehicle, quantity);
         }
-        return cart;
+        cartItemRepository.save(cartItem);
     }
 
     public ResponseEntity<String> removeFromCart(int cartItemId) {

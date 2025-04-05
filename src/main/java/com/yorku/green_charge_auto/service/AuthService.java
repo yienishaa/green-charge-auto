@@ -68,7 +68,7 @@ public class AuthService implements UserDetailsService {
 
         String token = jwtUtil.generateToken(user.getUsername());
 
-        return new LoginResponse(token, user.getId(), user.getRole());
+        return new LoginResponse(token, user.getId(), user.getRole().name());
     }
 
     public void resetPassword(String email) {
