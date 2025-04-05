@@ -1,5 +1,6 @@
 package com.yorku.green_charge_auto.controller;
 
+import com.yorku.green_charge_auto.dto.VehicleRequest;
 import com.yorku.green_charge_auto.dto.VehicleResponse;
 import com.yorku.green_charge_auto.model.Vehicle;
 import com.yorku.green_charge_auto.service.VehicleService;
@@ -21,32 +22,32 @@ public class CatalogController {
         return vehicleService.getAllVehicles();
     }
 
-    @GetMapping("/admin/all")
-    public List<Vehicle> getAdminAllVehicles() {
-        return vehicleService.getAdminAllVehicles();
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable int id) {
+    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable int id) {
         return vehicleService.getVehicleById(id)
+                .map(vehicleService::toVehicleResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/brand/{brand}")
-    public List<Vehicle> getVehiclesByBrand(@PathVariable String brand) {
-        return vehicleService.getVehiclesByBrand(brand);
+    public List<VehicleResponse> getVehiclesByBrand(@PathVariable String brand) {
+        return vehicleService.getVehiclesByBrand(brand).stream()
+                .map(vehicleService::toVehicleResponse)
+                .toList();
     }
 
     @PostMapping
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.addVehicle(vehicle);
+    public ResponseEntity<VehicleResponse> addVehicle(@RequestBody VehicleRequest vehicle) {
+        Vehicle saveVehicle = vehicleService.addVehicle(vehicle);
+        return ResponseEntity.ok(vehicleService.toVehicleResponse(saveVehicle));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Vehicle> updateVehicle(@PathVariable int id, @RequestBody Vehicle updatedVehicle) {
+    public ResponseEntity<VehicleResponse> updateVehicle(@PathVariable int id, @RequestBody VehicleRequest updatedVehicle) {
         try {
-            return ResponseEntity.ok(vehicleService.updateVehicle(id, updatedVehicle));
+            Vehicle updated = vehicleService.updateVehicle(id, updatedVehicle);
+            return ResponseEntity.ok(vehicleService.toVehicleResponse(updated));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
