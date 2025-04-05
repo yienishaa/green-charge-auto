@@ -1,14 +1,14 @@
 package com.yorku.green_charge_auto.service;
 
-import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.constants.Role;
+import com.yorku.green_charge_auto.dto.LoginRequest;
+import com.yorku.green_charge_auto.dto.LoginResponse;
+import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.repository.LoginUserRepository;
 import com.yorku.green_charge_auto.security.JwtUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,18 +41,35 @@ public class AuthService implements UserDetailsService {
         return jwtUtil.generateToken(username);
     }
 
-    public String loginUser(String username, String password) throws Exception {
-        AuthenticationManager authenticationManager = authConfig.getAuthenticationManager();
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        return jwtUtil.generateToken(username);
+    public LoginResponse loginUser(LoginRequest loginRequest) {
+        LoginUser user = loginUserRepository.findByUsername(loginRequest.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        String token = jwtUtil.generateToken(user.getUsername());
+
+        return new LoginResponse(token, user.getId(), user.getRole());
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<LoginUser> user = loginUserRepository.findByUsername(username);
+        String trimmed = username.trim();
+        Optional<LoginUser> user = loginUserRepository.findByUsername(trimmed);
+
         if (user.isEmpty()) {
+            System.out.println("No user found with username: '" + trimmed + "'");
             throw new UsernameNotFoundException("User not found");
         }
-        return User.withUsername(user.get().getUsername()).password(user.get().getPassword()).roles(user.get().getRole().name()).build();
+
+        System.out.println("Found user: " + user.get().getUsername());
+
+        return User.withUsername(user.get().getUsername())
+                .password(user.get().getPassword())
+                .roles(user.get().getRole().name())
+                .build();
     }
 }
