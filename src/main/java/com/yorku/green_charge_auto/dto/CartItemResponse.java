@@ -6,7 +6,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItemResponse {
-    private int id; //cart item id
+    private int cartItemId;
+    private int vid; 
     private String vehicleName;
     private String imageUrl;
     private double price;
