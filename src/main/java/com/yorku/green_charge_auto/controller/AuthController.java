@@ -2,12 +2,11 @@ package com.yorku.green_charge_auto.controller;
 
 
 import com.yorku.green_charge_auto.constants.Role;
-import com.yorku.green_charge_auto.service.AuthService;
-import com.yorku.green_charge_auto.service.ShoppingCartService;
 
-import lombok.Data;
 import com.yorku.green_charge_auto.dto.LoginRequest;
 import com.yorku.green_charge_auto.dto.LoginResponse;
+import com.yorku.green_charge_auto.service.AuthService;
+import com.yorku.green_charge_auto.service.ShoppingCartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +24,9 @@ public class AuthController {
     private ShoppingCartService shoppingCartService;
 
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
     @PostMapping("/register")
     public String register(@RequestBody LoginRequest request) {
         return authService.registerUser(request.getUsername(), request.getPassword(), Role.USER);
@@ -39,13 +41,7 @@ public class AuthController {
     public ResponseEntity<String> logout(@RequestParam int userId) {
         shoppingCartService.clearCartByUserId(userId);
         return ResponseEntity.ok("Cart cleared and user logged out.");
+
     }
 
-
-    @Data
-    static class RegisterRequest {
-        private String username;
-        private String password;
-        private Role role;
-    }
 }

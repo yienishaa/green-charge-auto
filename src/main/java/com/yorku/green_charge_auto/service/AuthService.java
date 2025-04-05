@@ -1,22 +1,21 @@
 package com.yorku.green_charge_auto.service;
 
-import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.constants.Role;
+import com.yorku.green_charge_auto.dto.LoginRequest;
+import com.yorku.green_charge_auto.dto.LoginResponse;
+import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.repository.LoginUserRepository;
 import com.yorku.green_charge_auto.security.JwtUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.yorku.green_charge_auto.dto.LoginRequest;
-import com.yorku.green_charge_auto.dto.LoginResponse;
+
 
 import java.util.Optional;
 
