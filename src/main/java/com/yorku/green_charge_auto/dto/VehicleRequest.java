@@ -1,9 +1,8 @@
 package com.yorku.green_charge_auto.dto;
 
-import com.yorku.green_charge_auto.constants.Colors;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 public class VehicleRequest {
@@ -18,5 +17,5 @@ public class VehicleRequest {
     private Integer quantity;
     private String image;
     private boolean hotDeal;
-    private Set<Colors> colors;
+    private List<String> colors;
 }

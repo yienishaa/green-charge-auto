@@ -23,8 +23,9 @@ public class CatalogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable int id) {
-        return vehicleService.getVehicleById(id)
+    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable String id) {
+        int vid = Integer.parseInt(id);
+        return vehicleService.getVehicleById(vid)
                 .map(vehicleService::toVehicleResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

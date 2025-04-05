@@ -1,6 +1,6 @@
 package com.yorku.green_charge_auto.constants;
 
-public enum Colors {
+public enum ColorsEnum {
     SILVER,
     BEIGE,
     WHITE,
