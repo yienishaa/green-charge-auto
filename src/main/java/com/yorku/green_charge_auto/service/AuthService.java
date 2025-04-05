@@ -1,8 +1,6 @@
 package com.yorku.green_charge_auto.service;
 
 import com.yorku.green_charge_auto.constants.Role;
-import com.yorku.green_charge_auto.dto.LoginRequest;
-import com.yorku.green_charge_auto.dto.LoginResponse;
 import com.yorku.green_charge_auto.model.LoginUser;
 import com.yorku.green_charge_auto.repository.LoginUserRepository;
 import com.yorku.green_charge_auto.security.JwtUtil;
