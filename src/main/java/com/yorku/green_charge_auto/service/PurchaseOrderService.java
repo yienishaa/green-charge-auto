@@ -6,6 +6,7 @@ import com.yorku.green_charge_auto.model.Address;
 import com.yorku.green_charge_auto.model.PurchaseOrder;
 import com.yorku.green_charge_auto.model.PurchaseOrderVehicle;
 import com.yorku.green_charge_auto.model.Vehicle;
+import com.yorku.green_charge_auto.repository.AddressRepository;
 import com.yorku.green_charge_auto.repository.PurchaseOrderRepository;
 import com.yorku.green_charge_auto.repository.VehicleRepository;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class PurchaseOrderService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     public List<PurchaseOrder> getAllOrders() {
         System.out.println("ORDERS list = "+purchaseOrderRepository.findAll());
@@ -67,10 +71,13 @@ public class PurchaseOrderService {
     addr.setStreet(request.getAddress().getStreet());
     addr.setCity(request.getAddress().getCity());
     addr.setZip(request.getAddress().getPostalCode());
+    addressRepository.save(addr);
     order.setAddress(addr);
+    
 
     List<PurchaseOrderVehicle> povList = new ArrayList<>();
     for (CheckoutRequest.CartItemDTO item : request.getCart()) {
+        System.out.println("Attempting to fetch vehicle ID: " + item.getVid());
         Vehicle vehicle = vehicleRepository.findById(item.getVid())
                 .orElseThrow(() -> new RuntimeException("Vehicle not found: " + item.getVid()));
 

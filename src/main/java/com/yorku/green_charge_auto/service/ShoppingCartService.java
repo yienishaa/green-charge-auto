@@ -99,18 +99,30 @@ public class ShoppingCartService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public CartItemResponse toCartItemResponse(CartItem cartItem) {
+    public void clearCartByUserId(int userId) {
+        Optional<ShoppingCart> optionalCart = shoppingCartRepository.findByLoginUser_Id(userId);
+    
+        optionalCart.ifPresent(cart -> {
+            List<CartItem> items = cartItemRepository.findByShoppingCart_CartId(cart.getCartId());
+            cartItemRepository.deleteAll(items);
+        });
+    }
+    
 
+    public CartItemResponse toCartItemResponse(CartItem cartItem) {
         CartItemResponse cartItemResponse = new CartItemResponse();
-        String vehicleName = cartItem.getVehicle().getBrand()+" "+cartItem.getVehicle().getModel();
-        cartItemResponse.setId(cartItem.getCartItemId());
+        String vehicleName = cartItem.getVehicle().getBrand() + " " + cartItem.getVehicle().getModel();
+    
+        cartItemResponse.setCartItemId(cartItem.getCartItemId());
+        cartItemResponse.setVid(cartItem.getVehicle().getVid());
         cartItemResponse.setVehicleName(vehicleName);
         cartItemResponse.setPrice(cartItem.getVehicle().getPrice());
         cartItemResponse.setImageUrl(cartItem.getVehicle().getImage());
         cartItemResponse.setQuantity(cartItem.getQuantity());
-
+    
         return cartItemResponse;
     }
+    
 
     public void clearCartByUserId(int userId) {
         Optional<ShoppingCart> optionalCart = shoppingCartRepository.findByLoginUser_Id(userId);
