@@ -27,6 +27,7 @@ public class AuthController {
     public ResponseEntity<?> register(@PathVariable String email) {
         try {
             String token = authService.registerUser(email, Role.USER);
+
             return ResponseEntity.ok().body(Map.of(
                     "message", "Registration successful, temporary password sent to email.",
                     "token", token
