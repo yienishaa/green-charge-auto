@@ -123,16 +123,7 @@ public class ShoppingCartService {
     
         return cartItemResponse;
     }
-    
 
-    public void clearCartByUserId(int userId) {
-        Optional<ShoppingCart> optionalCart = shoppingCartRepository.findByLoginUser_Id(userId);
-
-        optionalCart.ifPresent(cart -> {
-            List<CartItem> items = cartItemRepository.findByShoppingCart_CartId(cart.getCartId());
-            cartItemRepository.deleteAll(items);
-        });
-    }
 
 
 

@@ -2,6 +2,7 @@
 package com.yorku.green_charge_auto.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.yorku.green_charge_auto.constants.ColorsEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -46,14 +46,6 @@ public class Vehicle {
     @Column(name = "body")
     private String body;
 
-    @ManyToMany
-    @JoinTable(
-            name = "vehicle_model_colors",
-            joinColumns = @JoinColumn(name = "vehicle_model_id"),
-            inverseJoinColumns = @JoinColumn(name = "colors")
-    )
-    private Set<VehicleColors> availableColors;
-
     @Column(name = "price")
     private Double price;
 
@@ -69,5 +61,11 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Reviews> reviews = new ArrayList<>();
+
+    @ElementCollection(targetClass = ColorsEnum.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "vehicle_colors", joinColumns = @JoinColumn(name = "vehicle_id"))
+    @Column(name = "color")
+    private List<ColorsEnum> availableColors;
 
 }
