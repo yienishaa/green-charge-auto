@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -45,10 +46,13 @@ public class Vehicle {
     @Column(name = "body")
     private String body;
 
-    @ElementCollection
-    @CollectionTable(name = "vehicle_colors", joinColumns = @JoinColumn(name = "vehicleId"))
-    @Column(name = "color")
-    private List<String> colors;
+    @ManyToMany
+    @JoinTable(
+            name = "vehicle_model_colors",
+            joinColumns = @JoinColumn(name = "vehicle_model_id"),
+            inverseJoinColumns = @JoinColumn(name = "colors")
+    )
+    private Set<VehicleColors> availableColors;
 
     @Column(name = "price")
     private Double price;
