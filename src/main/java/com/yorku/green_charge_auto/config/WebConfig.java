@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         String[] origins = allowedOrigins.split(",");
         for (int i = 0; i < origins.length; i++) {
-            origins[i] = origins[i].trim(); // Ensure no trailing/leading spaces
+            origins[i] = origins[i].trim();
         }
 
         registry.addMapping("/**")

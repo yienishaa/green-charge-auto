@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -30,16 +31,31 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     private final AuthenticationConfiguration authConfig;
 
     public AuthService(AuthenticationConfiguration authConfig) {
         this.authConfig = authConfig;
     }
 
-    public String registerUser(String username, String password, Role role) {
-        LoginUser user = new LoginUser(username, password, role);
-        loginUserRepository.save(user);
-        return jwtUtil.generateToken(username);
+    public String registerUser(String email, Role role) {
+
+        Optional<LoginUser> existingUser = loginUserRepository.findByUsername(email);
+
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("Username exists");
+        }
+
+        String tempPassword = UUID.randomUUID().toString().substring(0, 8);
+
+        LoginUser newUser = new LoginUser(email, tempPassword, role);
+        loginUserRepository.save(newUser);
+
+        emailSenderService.sendSimpleEmail(email, tempPassword);
+
+        return jwtUtil.generateToken(email);
     }
 
     public LoginResponse loginUser(LoginRequest loginRequest) {
@@ -53,6 +69,17 @@ public class AuthService implements UserDetailsService {
         String token = jwtUtil.generateToken(user.getUsername());
 
         return new LoginResponse(token, user.getId(), user.getRole());
+    }
+
+    public void resetPassword(String email) {
+        LoginUser user = loginUserRepository.findByUsername(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String tempPassword = UUID.randomUUID().toString();
+        user.setPassword(tempPassword);
+        loginUserRepository.save(user);
+        emailSenderService.sendResetPasswordEmail(email, tempPassword);
+
     }
 
 

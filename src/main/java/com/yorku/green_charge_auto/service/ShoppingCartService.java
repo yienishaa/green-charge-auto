@@ -63,7 +63,8 @@ public class ShoppingCartService {
 
         ShoppingCart cart = optionalCart.orElseGet(()->{
             ShoppingCart shoppingCart = new ShoppingCart();
-            LoginUser loginUser = loginUserRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found"));
+            LoginUser loginUser = loginUserRepository.findById(userId)
+                    .orElseThrow(()-> new RuntimeException("User not found"));
             shoppingCart.setLoginUser(loginUser);
             return shoppingCartRepository.save(shoppingCart);
         });
