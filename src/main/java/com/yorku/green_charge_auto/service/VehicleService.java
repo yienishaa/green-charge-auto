@@ -32,10 +32,6 @@ public class VehicleService {
         return vehicleRepository.findAll().stream().map(this::toVehicleResponse).toList();
     }
 
-    public List<Vehicle> getAdminAllVehicles() {
-        return vehicleRepository.findAll();
-    }
-
     public Optional<Vehicle> getVehicleById(int id) {
         return vehicleRepository.findById(id);
     }
