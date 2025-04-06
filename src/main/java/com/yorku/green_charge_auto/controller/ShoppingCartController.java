@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/shopping-cart")
@@ -21,9 +22,10 @@ public class ShoppingCartController {
     @Autowired
     private CartItemRepository cartItemRepository;
 
-    @GetMapping("/{id}")
-    public List<CartItemResponse> getCartItemsByCartId(@PathVariable int id) {
-        return shoppingCartService.getCartItemsByCartId(id);
+    @PostMapping("/get-cart")
+    public List<CartItemResponse> getCartItemsByUserId(@RequestBody Map<String, String>body) {
+        int userId = Integer.parseInt(body.get("userId"));
+        return shoppingCartService.getCartItemsByUserId(userId);
     }
 
     @PostMapping("/add-to-cart")
@@ -32,10 +34,10 @@ public class ShoppingCartController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}/delete-all")
-    public HttpStatus deleteShoppingCart(@PathVariable int id) {
+    @DeleteMapping("/{userId}/delete-all")
+    public HttpStatus deleteShoppingCart(@PathVariable int userId) {
         try {
-            if(shoppingCartService.deleteCart(id)){
+            if(shoppingCartService.deleteCart(userId)){
                 return HttpStatus.OK;
             }else {
                 return HttpStatus.NOT_FOUND;

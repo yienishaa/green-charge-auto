@@ -37,8 +37,12 @@ public class ShoppingCartService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public List<CartItemResponse> getCartItemsByCartId(int shoppingCartId) {
-        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart_CartId(shoppingCartId);
+    public List<CartItemResponse> getCartItemsByUserId(int userId) {
+
+        ShoppingCart shoppingCart = shoppingCartRepository.findByLoginUser_Id(userId)
+                .orElseThrow(()->new RuntimeException("Cart not found"));
+
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart(shoppingCart);
 
         List<CartItemResponse> cartItemResponseList = new ArrayList<>();
 
@@ -48,14 +52,14 @@ public class ShoppingCartService {
         return cartItemResponseList;
     }
 
-    public boolean deleteCart(int shoppingCartId) {
-        if (shoppingCartRepository.findById(shoppingCartId).isPresent()) {
-            shoppingCartRepository.deleteById(shoppingCartId);
-            return true;
-        }else {
-            return false;
-        }
+    public boolean deleteCart(int userId) {
 
+        ShoppingCart shoppingCart = shoppingCartRepository.findByLoginUser_Id(userId)
+                .orElseThrow(()->new RuntimeException("Cart not found"));
+
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart(shoppingCart);
+        cartItemRepository.deleteAll(cartItemList);
+        return true;
     }
 
     public void addToCart(int vid, int quantity, int userId) {
